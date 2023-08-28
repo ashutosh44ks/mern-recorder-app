@@ -1,14 +1,14 @@
 # mern-recorder-app
  
 ## Features
-1. Login System using JWt token
+1. Login System using JWT token
 2. Record Screen and Webcam
 3. Live Preview
 4. Download ability
 
 ## Tech stack
-MERN (MongoDB + Express.js + React JS + Node.js)
-Used react-media-recorder-2 for implementing Recording systems
+- MERN (MongoDB + Express.js + React JS + Node.js)
+- Used react-media-recorder-2 for implementing Recording systems
 
 ## How to run
 1. Install node modules in root and root>client dir
