@@ -13,6 +13,9 @@ const RecorderUI = ({
 }) => {
   const [webcamId, setWebcamId] = useState("");
   const [screenId, setScreenId] = useState("");
+  const [webcamErr, setWebcamErr] = useState("");
+  const [screemErr, setScreemErr] = useState("");
+
   // const blobToBase64 = (blob) =>
   //   new Promise((resolve, reject) => {
   //     const reader = new FileReader();
@@ -21,6 +24,7 @@ const RecorderUI = ({
   //     reader.onerror = (error) => reject(error);
   //   });
   const beginRecording = async (isWebcam) => {
+    isWebcam ? setWebcamErr("") : setScreemErr("");
     try {
       let apiData = {
         webcam: isWebcam,
@@ -35,9 +39,13 @@ const RecorderUI = ({
       isWebcam ? setWebcamId(data.data._id) : setScreenId(data.data._id);
     } catch (err) {
       console.log(err);
+      isWebcam
+        ? setWebcamErr(err.response.data.msg)
+        : setScreemErr(err.response.data.msg);
     }
   };
   const finishRecording = async (isWebcam) => {
+    isWebcam ? setWebcamErr("") : setScreemErr("");
     try {
       // const response = await fetch(mediaBlobUrl);
       // const blob = await response.blob();
@@ -53,6 +61,9 @@ const RecorderUI = ({
       isWebcam ? setWebcamId("") : setScreenId("");
     } catch (err) {
       console.log(err);
+      isWebcam
+        ? setWebcamErr(err.response.data.msg)
+        : setScreemErr(err.response.data.msg);
     }
   };
 
@@ -63,7 +74,12 @@ const RecorderUI = ({
       ) : (
         <video src={mediaBlobUrl} width={500} height={500} controls autoPlay />
       )}
-      <p>Status : {status}</p>
+      <p className="flex justify-between items-center">
+        <span>Status : {status}</span>
+        <span className="text-sm text-red-500">
+          {isWebcam ? webcamErr : screemErr}
+        </span>
+      </p>
       <div className="flex gap-4">
         <button
           className="btn btn-primary"
