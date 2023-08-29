@@ -7,6 +7,7 @@ const Login = () => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = { name, email };
@@ -19,6 +20,7 @@ const Login = () => {
       navigate("/");
     } catch (e) {
       console.log(e);
+      setError(e.response.data.msg);
     }
   };
   return (
@@ -51,6 +53,7 @@ const Login = () => {
               Login
             </button>
           </div>
+          {error && <span className="text-sm text-red-500">{error}</span>}
         </form>
       </div>
     </div>
