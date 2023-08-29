@@ -21,6 +21,14 @@ const getJWTData = async (user, req) => {
   return { accessToken: accessToken, refreshToken: refreshToken };
 };
 
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+function isValidTimestamp(_timestamp) {
+  const newTimestamp = new Date(_timestamp).getTime();
+  return isNumeric(newTimestamp);
+}
+
 // middleware
 function authenticateToken(req, res, next) {
   const authHeader = req.headers["authorization"];
@@ -38,4 +46,5 @@ module.exports = {
   generateAccessToken,
   authenticateToken,
   getJWTData,
+  isValidTimestamp,
 };

@@ -15,12 +15,6 @@ router.post("/login", async (req, res) => {
     });
     if (user) {
       // LOGIN procedure
-      console.log(
-        "logging",
-        user.name !== req.body.name,
-        user.name,
-        req.body.name
-      );
       if (user.name !== req.body.name) {
         return res.status(400).json({
           msg: "Incorrect Credentials: please try again",

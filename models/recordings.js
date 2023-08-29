@@ -19,12 +19,11 @@ const recordingsSchema = new mongoose.Schema({
   },
   endTime: {
     type: String,
-    required: true,
   },
-  base64Blob: {
-    type: String,
-    required: true,
-  },
+  // base64Blob: {
+  //   type: String,
+  //   required: true,
+  // },
 });
 
 module.exports = mongoose.model("Recordings", recordingsSchema);
